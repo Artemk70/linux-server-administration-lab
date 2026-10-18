@@ -35,3 +35,17 @@ linux-server-administration-lab/
 ├── docs/
 ├── scripts/
 └── screenshots/
+
+## Progress
+
+- [x] Git repository initialized
+- [x] Initial README published to GitHub
+- [ ] Linux administration documentation
+- [ ] Bash automation scripts
+- [ ] Troubleshooting exercises
+
+## Purpose
+
+This repository is a practical learning project focused on
+building Linux administration skills and preparing for
+entry-level infrastructure and DevOps roles.
