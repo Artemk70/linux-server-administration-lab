@@ -1,9 +1,10 @@
-
 #!/usr/bin/env bash
 
 set -euo pipefail
 
-LOG_DIR="logs"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$(dirname -- "$SCRIPT_DIR")"
+LOG_DIR="$PROJECT_DIR/logs"
 REPORT_FILE="$LOG_DIR/system-report.txt"
 
 usage() {
@@ -43,45 +44,69 @@ if [[ "$REPORT_FILE" == "$LOG_DIR/"* ]]; then
     fi
 fi
 
-if ! touch "$REPORT_FILE"; then
-    echo "ERROR: Cannot write to '$REPORT_FILE'." >&2
+REPORT_DIR="$(dirname -- "$REPORT_FILE")"
+
+if [[ ! -d "$REPORT_DIR" ]]; then
+    echo "ERROR: Output directory '$REPORT_DIR' does not exist." >&2
     exit 1
 fi
 
-exec > >(tee "$REPORT_FILE") 2>&1
+TEMP_FILE="$(mktemp "$REPORT_DIR/.system-info.XXXXXX")" || {
+    echo "ERROR: Cannot create temporary file in '$REPORT_DIR'." >&2
+    exit 1
+}
 
-echo "===== SYSTEM INFORMATION ====="
-echo
+cleanup() {
+    rm -f -- "$TEMP_FILE"
+}
 
-echo "Hostname:"
-hostname
-echo
+trap cleanup EXIT
 
-echo "Operating system:"
-if [[ -f /etc/os-release ]]; then
-    . /etc/os-release
-    echo "$PRETTY_NAME"
-else
-    echo "OS information unavailable"
+if ! {
+    echo "===== SYSTEM INFORMATION ====="
+    echo
+
+    echo "Hostname:"
+    hostname
+    echo
+
+    echo "Operating system:"
+    if [[ -f /etc/os-release ]]; then
+        . /etc/os-release
+        echo "$PRETTY_NAME"
+    else
+        echo "OS information unavailable"
+    fi
+    echo
+
+    echo "Kernel:"
+    uname -r
+    echo
+
+    echo "Uptime:"
+    uptime -p
+    echo
+
+    echo "Current user:"
+    whoami
+    echo
+
+    echo "Disk usage:"
+    df -h /
+    echo
+
+    echo "Memory usage:"
+    free -h
+} > "$TEMP_FILE"; then
+    echo "ERROR: Failed to generate system report." >&2
+    exit 1
 fi
-echo
 
-echo "Kernel:"
-uname -r
-echo
+if ! mv -f -- "$TEMP_FILE" "$REPORT_FILE"; then
+    echo "ERROR: Cannot replace report '$REPORT_FILE'." >&2
+    exit 1
+fi
 
-echo "Uptime:"
-uptime -p
-echo
+trap - EXIT
 
-echo "Current user:"
-whoami
-echo
-
-echo "Disk usage:"
-df -h /
-echo
-
-echo "Memory usage:"
-free -h
-
+cat -- "$REPORT_FILE"
