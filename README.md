@@ -1,31 +1,27 @@
 # Linux Server Administration Lab
 
-## About
+A hands-on learning project focused on Linux system administration, troubleshooting, and Bash automation.
 
-This repository documents my hands-on Linux system administration training using Linux Mint and Ubuntu Server.
+The repository documents practical exercises and small projects completed while building foundational skills for entry-level IT infrastructure and DevOps roles.
 
-The goal is to develop practical skills in Linux administration, network troubleshooting, system monitoring, and Bash automation through practical exercises and small projects.
+## Project Goals
 
-## Environment
+- Practice Linux system administration in a virtual lab.
+- Develop Bash scripting and command-line skills.
+- Learn to collect and interpret basic system diagnostics.
+- Practice Git version control and maintain a public project on GitHub.
+- Build a foundation for further work with networking, monitoring, and automation.
 
-- Linux Mint
-- Ubuntu Server 24.04 LTS
-- Bash
-- Git and GitHub
-- SSH and SCP
-- VirtualBox
+## Lab Environment
 
-## Topics
+- **Host OS:** Linux Mint
+- **Server OS:** Ubuntu Server 24.04 LTS
+- **Virtualization:** VirtualBox
+- **Scripting:** Bash
+- **Version control:** Git and GitHub
+- **Remote administration:** SSH and SCP
 
-- Linux filesystem and disk management
-- Users, groups, and file permissions
-- Processes and systemd services
-- Networking and troubleshooting
-- System logs and monitoring
-- Bash scripting and automation
-- SSH and secure file transfer
-
-## Project Structure
+## Repository Structure
 
 ```text
 linux-server-administration-lab/
@@ -37,6 +33,11 @@ linux-server-administration-lab/
 └── logs/
 ```
 
+- `scripts/` — Bash scripts for administration and diagnostics.
+- `docs/` — documentation and practical notes.
+- `screenshots/` — screenshots documenting lab work.
+- `logs/` — generated diagnostic reports.
+
 ## Implemented
 
 ### System Information Script
@@ -45,7 +46,7 @@ linux-server-administration-lab/
 
 A Bash script that collects basic system information and generates a diagnostic report.
 
-The script reports:
+The report includes:
 
 - Hostname
 - Operating system
@@ -57,7 +58,7 @@ The script reports:
 
 #### Usage
 
-Run the script from the repository root:
+Run from the repository root:
 
 ```bash
 ./scripts/system-info.sh
@@ -69,32 +70,77 @@ By default, the report is saved to:
 logs/system-report.txt
 ```
 
-Display the available command-line options:
+Display command-line help:
 
 ```bash
 ./scripts/system-info.sh --help
 ```
 
-Save the report to a custom file:
+Save the report to a custom path:
 
 ```bash
 ./scripts/system-info.sh --output /tmp/system-report.txt
 ```
 
-The script supports basic input validation and reports errors for unknown arguments or a missing output path.
+#### Validation and Error Handling
 
-The script collects system information and writes a report. It does not intentionally modify system configuration.
+The script includes basic command-line argument validation. It reports errors for unknown options, a missing output path, and an output directory that does not exist.
+
+It also uses a temporary file when generating a report before replacing the destination file. This helps avoid leaving a partially written report if report generation fails.
+
+The script collects diagnostic information and writes a report; it is not designed to modify system configuration.
+
+#### Basic Checks
+
+Check Bash syntax:
+
+```bash
+bash -n scripts/system-info.sh
+```
+
+Run the script's help option:
+
+```bash
+./scripts/system-info.sh --help
+```
+
+Generate a report at a custom path:
+
+```bash
+./scripts/system-info.sh --output /tmp/system-report.txt
+```
+
+Inspect the generated report:
+
+```bash
+cat /tmp/system-report.txt
+```
 
 ## Progress
 
-- [x] Git repository initialized and published to GitHub
-- [x] Bash system information script implemented and tested
-- [x] Script execution permissions configured
-- [x] Diagnostic report generation and file output
-- [x] Basic command-line argument handling
-- [ ] Linux administration documentation
-- [ ] Troubleshooting exercises
+- [x] Initialized a Git repository and published it to GitHub.
+- [x] Created and tested a Bash system information script.
+- [x] Configured script execution permissions.
+- [x] Implemented diagnostic report generation and custom output paths.
+- [x] Added basic command-line argument validation.
+- [x] Added temporary-file handling for report generation.
+- [ ] Expand Linux administration documentation.
+- [ ] Add practical troubleshooting exercises.
+- [ ] Add further scripts for system administration and diagnostics.
+
+## Next Steps
+
+Planned areas of study and development include:
+
+- Linux users, groups, and permissions
+- Processes and systemd services
+- Disk and filesystem administration
+- Network troubleshooting
+- System logs and monitoring
+- Additional Bash automation
 
 ## Purpose
 
-This repository is a practical learning project focused on developing Linux administration skills and preparing for entry-level IT infrastructure and DevOps roles.
+This repository is an ongoing practical learning project. It demonstrates my progress in Linux administration, Bash scripting, troubleshooting, and Git-based development as I prepare for entry-level IT infrastructure and DevOps opportunities.
+
+The project will evolve as new skills are learned and tested in the lab.
