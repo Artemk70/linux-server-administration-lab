@@ -15,6 +15,45 @@ usage() {
     echo "  --output FILE   Write report to FILE instead of the default path"
 }
 
+generate_report() {
+    {
+        echo "===== SYSTEM INFORMATION ====="
+        echo
+
+        echo "Hostname:"
+        hostname || return 1
+        echo
+
+        echo "Operating system:"
+        if [[ -f /etc/os-release ]]; then
+            . /etc/os-release
+            echo "${PRETTY_NAME:-OS name unavailable}"
+        else
+            echo "OS information unavailable"
+        fi
+        echo
+
+        echo "Kernel:"
+        uname -r || return 1
+        echo
+
+        echo "Uptime:"
+        uptime -p || return 1
+        echo
+
+        echo "Current user:"
+        whoami || return 1
+        echo
+
+        echo "Disk usage:"
+        df -h / || return 1
+        echo
+
+        echo "Memory usage:"
+        free -h || return 1
+    }
+}
+
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --help)
@@ -62,45 +101,11 @@ cleanup() {
 
 trap cleanup EXIT
 
-if ! {
-    echo "===== SYSTEM INFORMATION ====="
-    echo
-
-    echo "Hostname:"
-    hostname
-    echo
-
-    echo "Operating system:"
-    if [[ -f /etc/os-release ]]; then
-        . /etc/os-release
-        echo "$PRETTY_NAME"
-    else
-        echo "OS information unavailable"
-    fi
-    echo
-
-    echo "Kernel:"
-    uname -r
-    echo
-
-    echo "Uptime:"
-    uptime -p
-    echo
-
-    echo "Current user:"
-    whoami
-    echo
-
-    echo "Disk usage:"
-    df -h /
-    echo
-
-    echo "Memory usage:"
-    free -h
-} > "$TEMP_FILE"; then
+if ! generate_report > "$TEMP_FILE"; then
     echo "ERROR: Failed to generate system report." >&2
     exit 1
 fi
+
 
 if ! mv -f -- "$TEMP_FILE" "$REPORT_FILE"; then
     echo "ERROR: Cannot replace report '$REPORT_FILE'." >&2
