@@ -56,23 +56,23 @@ generate_report() {
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --help)
-            usage
-            exit 0
-            ;;
-        --output)
-            if [[ $# -lt 2 || -z "$2" ]]; then
-                echo "ERROR: --output requires a file path." >&2
-                exit 2
-            fi
-            REPORT_FILE="$2"
-            shift 2
-            ;;
-        *)
-            echo "ERROR: Unknown argument: $1" >&2
-            usage >&2
+    --help)
+        usage
+        exit 0
+        ;;
+    --output)
+        if [[ $# -lt 2 || -z "$2" ]]; then
+            echo "ERROR: --output requires a file path." >&2
             exit 2
-            ;;
+        fi
+        REPORT_FILE="$2"
+        shift 2
+        ;;
+    *)
+        echo "ERROR: Unknown argument: $1" >&2
+        usage >&2
+        exit 2
+        ;;
     esac
 done
 
@@ -101,11 +101,10 @@ cleanup() {
 
 trap cleanup EXIT
 
-if ! generate_report > "$TEMP_FILE"; then
+if ! generate_report >"$TEMP_FILE"; then
     echo "ERROR: Failed to generate system report." >&2
     exit 1
 fi
-
 
 if ! mv -f -- "$TEMP_FILE" "$REPORT_FILE"; then
     echo "ERROR: Cannot replace report '$REPORT_FILE'." >&2
