@@ -27,6 +27,8 @@ The repository documents practical exercises and small projects completed while 
 linux-server-administration-lab/
 ├── README.md
 ├── docs/
+│   ├── README.md
+│   └── lab-environment.md
 ├── scripts/
 │   └── system-info.sh
 ├── screenshots/
@@ -37,6 +39,13 @@ linux-server-administration-lab/
 - `docs/` — documentation and practical notes.
 - `screenshots/` — screenshots documenting lab work.
 - `logs/` — generated diagnostic reports.
+
+## Documentation
+
+Technical documentation is available in the [`docs/`](docs/README.md) directory.
+
+- [Documentation Index](docs/README.md) — overview and navigation.
+- [Lab Environment](docs/lab-environment.md) — hardware, operating systems, virtualization, and development tools.
 
 ## Implemented
 
@@ -124,7 +133,9 @@ cat /tmp/system-report.txt
 - [x] Implemented diagnostic report generation and custom output paths.
 - [x] Added basic command-line argument validation.
 - [x] Added temporary-file handling for report generation.
-- [ ] Expand Linux administration documentation.
+- [x] Created the initial Linux administration documentation structure.
+- [x] Documented the laboratory environment.
+- [ ] Expand Linux administration documentation with practical guides.
 - [ ] Add practical troubleshooting exercises.
 - [ ] Add further scripts for system administration and diagnostics.
 
