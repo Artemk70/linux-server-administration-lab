@@ -1,10 +1,10 @@
 # Linux Server Administration Lab
 
-A hands-on learning project focused on Linux system administration, troubleshooting, Bash automation, and infrastructure fundamentals.
+A hands-on learning project focused on Linux system administration, troubleshooting, Bash scripting, and infrastructure fundamentals.
 
-This repository documents practical exercises, technical documentation, and small automation projects developed in a virtual Linux server environment.
+This repository documents practical exercises, technical documentation, and automation tasks performed in a virtual Linux server environment.
 
-The project is intended to build practical skills relevant to Linux administration and entry-level IT infrastructure and DevOps roles.
+The project aims to develop practical engineering skills relevant to Linux system administration, IT infrastructure, and entry-level DevOps roles.
 
 ## Project Goals
 
@@ -12,18 +12,22 @@ The project is intended to build practical skills relevant to Linux administrati
 - Develop Bash scripting and command-line skills.
 - Learn system diagnostics and troubleshooting techniques.
 - Understand Linux filesystem hierarchy and system organization.
-- Practice Git version control and maintain a public GitHub repository.
+- Manage Linux users, groups, and file permissions.
+- Practice remote server administration using SSH.
+- Use Git and GitHub for version control and technical documentation.
 - Build foundational knowledge of networking, monitoring, and infrastructure automation.
 
 ## Lab Environment
 
-- **Host OS:** Linux Mint
-- **Server OS:** Ubuntu Server 24.04 LTS
-- **Virtualization:** VirtualBox
-- **Scripting:** Bash
-- **Version Control:** Git and GitHub
-- **Remote Administration:** SSH and SCP
-- **Code Editor:** Visual Studio Code
+| Component | Configuration |
+|---|---|
+| Host OS | Linux Mint 22.3 |
+| Server OS | Ubuntu Server 24.04 LTS |
+| Virtualization | VirtualBox 7.0 |
+| Scripting | Bash |
+| Version Control | Git and GitHub |
+| Remote Administration | SSH and SCP |
+| Code Editor | Visual Studio Code |
 
 ## Repository Structure
 
@@ -34,7 +38,8 @@ linux-server-administration-lab/
 │   ├── README.md
 │   ├── lab-environment.md
 │   └── guides/
-│       └── filesystem.md
+│       ├── filesystem.md
+│       └── users-and-permissions.md
 ├── scripts/
 │   └── system-info.sh
 ├── screenshots/
@@ -45,7 +50,7 @@ linux-server-administration-lab/
 ### Directory Overview
 
 - `docs/` — technical documentation and practical guides.
-- `docs/guides/` — Linux administration guides.
+- `docs/guides/` — Linux system administration guides.
 - `scripts/` — Bash scripts for system administration and diagnostics.
 - `screenshots/` — screenshots documenting practical lab exercises.
 - `logs/` — generated diagnostic reports.
@@ -55,8 +60,9 @@ linux-server-administration-lab/
 Technical documentation is available in the [`docs/`](docs/README.md) directory.
 
 - [Documentation Index](docs/README.md) — documentation overview and navigation.
-- [Lab Environment](docs/lab-environment.md) — hardware, operating systems, virtualization, and development tools.
+- [Lab Environment](docs/lab-environment.md) — laboratory hardware, operating systems, virtualization, and development tools.
 - [Linux Filesystem Administration](docs/guides/filesystem.md) — filesystem hierarchy, FHS, system directories, and UsrMerge.
+- [Linux Users and Permissions](docs/guides/users-and-permissions.md) — user and group management, file ownership, permissions, ACL, and sudo privileges.
 
 ## Implemented
 
@@ -155,6 +161,22 @@ Topics include:
 - Symbolic links and the UsrMerge mechanism.
 - Basic filesystem inspection commands.
 
+### 3. Linux Users and Permissions
+
+**File:** `docs/guides/users-and-permissions.md`
+
+Technical documentation based on practical user and permission management exercises in Ubuntu Server.
+
+Topics include:
+
+- Linux users and groups.
+- File ownership and permissions.
+- Access Control Lists (ACL).
+- ACL masks and effective permissions.
+- Directory permissions and file deletion.
+- Sudo privileges.
+- Access-control troubleshooting.
+
 ## Progress
 
 - [x] Initialized a Git repository and published it to GitHub.
@@ -166,27 +188,28 @@ Topics include:
 - [x] Created the Linux administration documentation structure.
 - [x] Documented the laboratory environment.
 - [x] Added the Linux filesystem administration guide.
+- [x] Added the Linux users and permissions guide.
 - [ ] Expand Linux administration documentation with practical guides.
-- [ ] Add practical troubleshooting exercises.
-- [ ] Develop additional system administration scripts.
+- [ ] Develop practical Linux troubleshooting exercises.
+- [ ] Document troubleshooting procedures and verified solutions.
 
 ## Next Steps
 
 Planned areas of study and development include:
 
-- Linux users, groups, and permissions.
+- Linux users, groups, and permissions troubleshooting.
 - Processes and systemd services.
 - Disk and filesystem administration.
 - Filesystem mounting and `/etc/fstab`.
 - Network configuration and troubleshooting.
-- System logs and journalctl.
+- System logs and `journalctl`.
 - System monitoring and resource analysis.
-- Additional Bash automation.
+- Bash scripting and automation fundamentals.
 
 ## Purpose
 
 This repository is an ongoing practical learning project demonstrating the development of skills in Linux system administration, Bash scripting, troubleshooting, and Git-based workflows.
 
-It serves as a practical portfolio of laboratory exercises and technical documentation while preparing for entry-level IT infrastructure and DevOps engineering opportunities.
+It serves as a technical portfolio of practical laboratory exercises, documented troubleshooting procedures, and system administration knowledge while preparing for Linux administration and DevOps engineering opportunities.
 
 The project will evolve as new technologies and administration practices are studied, implemented, tested, and documented.
